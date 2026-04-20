@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Ku } from '../src/butkian/ku';
+import { Ku } from '../src/butkian/ku.ts';
 
 describe('Conversion', () => {
   it('test_TL_to_POJ', () => {

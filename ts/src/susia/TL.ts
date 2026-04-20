@@ -1,5 +1,5 @@
-import { KHIN_SIANN_HU } from '../butkian/kongiong';
-import { thiah, tshiau_tuasiosia, SuSiaTshoNgoo } from './kongke';
+import { KHIN_SIANN_HU } from '../butkian/kongiong.ts';
+import { thiah, tshiau_tuasiosia, SuSiaTshoNgoo } from './kongke.ts';
 
 export function tsuanTL(bun: string): string {
   const si_khinsiann = bun.startsWith(KHIN_SIANN_HU);

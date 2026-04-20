@@ -11,6 +11,7 @@
     "skipLibCheck": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "allowImportingTsExtensions": true,
     "moduleDetection": "force"
   },
   "exclude": ["test", "node_modules", "dist"]

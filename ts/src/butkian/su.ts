@@ -1,5 +1,5 @@
-import { LIAN_JI_HU, KHIN_SIANN_HU, si_lomaji } from './kongiong';
-import { Ji } from './ji';
+import { LIAN_JI_HU, KHIN_SIANN_HU, si_lomaji } from './kongiong.ts';
+import { Ji } from './ji.ts';
 
 export class Su {
   private _ji: Ji[];

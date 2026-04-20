@@ -8,8 +8,8 @@ import {
   si_lomaji,
   normalize_taibun
 } from './kongiong';
-import { Su } from './su';
-import { Ji } from './ji';
+import { Su } from './su.ts';
+import { Ji } from './ji.ts';
 
 export class TuiBeTse extends Error {
   constructor(message: string) {

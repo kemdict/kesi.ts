@@ -1,12 +1,16 @@
-import { tsuanPOJ } from '../susia/POJ';
-import { tsuanTL } from '../susia/TL';
-import { KHIN_SIANN_HU, si_lomaji } from './kongiong';
+import { tsuanPOJ } from "../susia/POJ.ts";
+import { tsuanTL } from "../susia/TL.ts";
+import { KHIN_SIANN_HU, si_lomaji } from "./kongiong.ts";
 
 export class Ji {
   hanlo: string;
   lomaji: string;
 
-  constructor(hanlo: string, lomaji: string | null = null, si_khinsiann: boolean = false) {
+  constructor(
+    hanlo: string,
+    lomaji: string | null = null,
+    si_khinsiann: boolean = false,
+  ) {
     if (si_khinsiann) {
       this.hanlo = `--${hanlo}`;
     } else {
@@ -47,11 +51,7 @@ export class Ji {
       hanlo = this.hanlo;
       lomaji = this.lomaji;
     }
-    return new Ji(
-      tsuanPOJ(hanlo),
-      tsuanPOJ(lomaji),
-      this.si_khinsiann
-    );
+    return new Ji(tsuanPOJ(hanlo), tsuanPOJ(lomaji), this.si_khinsiann);
   }
 
   TL(): Ji {
@@ -64,11 +64,7 @@ export class Ji {
       hanlo = this.hanlo;
       lomaji = this.lomaji;
     }
-    return new Ji(
-      tsuanTL(hanlo),
-      tsuanTL(lomaji),
-      this.si_khinsiann
-    );
+    return new Ji(tsuanTL(hanlo), tsuanTL(lomaji), this.si_khinsiann);
   }
 
   KIP = this.TL;

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { Ku } from '../src/butkian/ku';
+import { Ku } from '../src/butkian/ku.ts';
 
 describe('TshiTngSu', () => {
   const check = (語句: string, 詞: string[]) => {

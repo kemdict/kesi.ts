@@ -1,4 +1,4 @@
-import { KONGKE_SIANNBO, KONGKE_UNBO } from './pio';
+import { KONGKE_SIANNBO, KONGKE_UNBO } from './pio.ts';
 
 export const SI_TSUAN_TUASIA = 'SI_TSUAN_TUASIA';
 export const SI_TSUAN_SIOSIA = 'SI_TSUAN_SIOSIA';

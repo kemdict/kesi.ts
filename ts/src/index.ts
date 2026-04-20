@@ -1,6 +1,6 @@
-import { Ku, TuiBeTse } from './butkian/ku';
-import { normalize_taibun, 標點符號 as PIAUTIAM } from './butkian/kongiong';
-import { thiah, SuSiaTshoNgoo } from './susia/kongke';
+import { Ku, TuiBeTse } from "./butkian/ku.ts";
+import { normalize_taibun, 標點符號 as PIAUTIAM } from "./butkian/kongiong.ts";
+import { thiah, SuSiaTshoNgoo } from "./susia/kongke.ts";
 
 export { Ku, TuiBeTse, normalize_taibun, PIAUTIAM };
 
