@@ -1,33 +1,36 @@
-import { KONGKE_SIANNBO, KONGKE_UNBO } from './pio.ts';
+import { KONGKE_SIANNBO, KONGKE_UNBO } from "./pio.ts";
 
-export const SI_TSUAN_TUASIA = 'SI_TSUAN_TUASIA';
-export const SI_TSUAN_SIOSIA = 'SI_TSUAN_SIOSIA';
-export const SI_THAU_TUASIA = 'SI_THAU_TUASIA';
+export const SI_TSUAN_TUASIA = "SI_TSUAN_TUASIA";
+export const SI_TSUAN_SIOSIA = "SI_TSUAN_SIOSIA";
+export const SI_THAU_TUASIA = "SI_THAU_TUASIA";
 
 export const TIAUHO_TIAUHU_PIO: Record<string, string> = {
-  '1': '',
-  '2': '\u0301',
-  '3': '\u0300',
-  '4': '',
-  '5': '\u0302',
-  '6': '\u030c',
-  '7': '\u0304',
-  '8': '\u030d',
-  '9': '\u0306',
+  "1": "",
+  "2": "\u0301",
+  "3": "\u0300",
+  "4": "",
+  "5": "\u0302",
+  "6": "\u030c",
+  "7": "\u0304",
+  "8": "\u030d",
+  "9": "\u0306",
 };
 
 export class SuSiaTshoNgoo extends Error {
   constructor(message: string) {
     super(message);
-    this.name = 'SuSiaTshoNgoo';
+    this.name = "SuSiaTshoNgoo";
   }
 }
 
 export function khuann_tuasiosia(bun: string): string {
-  const latin = bun.replace(/ⁿ/g, '');
+  const latin = bun.replace(/ⁿ/g, "");
   if (latin === latin.toLowerCase()) {
     return SI_TSUAN_SIOSIA;
-  } else if (/^[A-Z]/.test(latin) && latin.slice(1) === latin.slice(1).toLowerCase()) {
+  } else if (
+    /^[A-Z]/.test(latin) &&
+    latin.slice(1) === latin.slice(1).toLowerCase()
+  ) {
     return SI_THAU_TUASIA;
   } else {
     return SI_TSUAN_TUASIA;
@@ -58,7 +61,7 @@ export function thiah(lomaji: string): [string, string, string, string] {
 }
 
 export function theh_sianntiau(lomaji: string): [string, string] {
-  const nfd = lomaji.normalize('NFD');
+  const nfd = lomaji.normalize("NFD");
   // Numerical tone
   const lastChar = nfd.slice(-1);
   if (lastChar in TIAUHO_TIAUHU_PIO) {
@@ -66,11 +69,11 @@ export function theh_sianntiau(lomaji: string): [string, string] {
   }
   // Traditional tone
   const pitui = /[\u0301\u0300\u0302\u030c\u0304\u030d\u030b\u0306]/.exec(nfd);
-  let tiau = '';
+  let tiau = "";
   if (pitui) {
     tiau = pitui[0];
   }
-  const siannun = nfd.replace(tiau, '');
+  const siannun = nfd.replace(tiau, "");
   return [siannun, tiau];
 }
 
@@ -80,23 +83,23 @@ export function thong_n(siannun: string): string {
     // The 'i' flag is not there in python, but siannun might be mixed case
     // Actually Python code: phinnim = re.sub('([a-z])(N)(h?)', r'\1ⁿ\3', siannun)
     // It matches lowercase letter followed by uppercase N.
-    return p1 + 'ⁿ' + p3;
+    return p1 + "ⁿ" + p3;
   });
-  phinnim = phinnim.replace(/ᴺ/g, 'ⁿ');
+  phinnim = phinnim.replace(/ᴺ/g, "ⁿ");
   return phinnim;
 }
 
 export function tsuan_kongke(siannun: string): string {
   return siannun
-    .replace(/ch/g, 'ts')
-    .replace(/ou/g, 'oo')
-    .replace(/o͘/g, 'oo')
-    .replace(/ⁿ/g, 'nn')
-    .replace(/oa/g, 'ua')
-    .replace(/oe/g, 'ue')
-    .replace(/eng/g, 'ing')
-    .replace(/ek/g, 'ik')
-    .replace(/oonn/g, 'onn');
+    .replace(/ch/g, "ts")
+    .replace(/ou/g, "oo")
+    .replace(/o͘/g, "oo")
+    .replace(/ⁿ/g, "nn")
+    .replace(/oa/g, "ua")
+    .replace(/oe/g, "ue")
+    .replace(/eng/g, "ing")
+    .replace(/ek/g, "ik")
+    .replace(/oonn/g, "onn");
 }
 
 export function thiah_siannun(無調號音標: string): [string, string] {

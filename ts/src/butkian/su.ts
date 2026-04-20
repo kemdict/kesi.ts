@@ -1,5 +1,5 @@
-import { LIAN_JI_HU, KHIN_SIANN_HU, si_lomaji } from './kongiong.ts';
-import { Ji } from './ji.ts';
+import { LIAN_JI_HU, KHIN_SIANN_HU, si_lomaji } from "./kongiong.ts";
+import { Ji } from "./ji.ts";
 
 export class Su {
   private _ji: Ji[];
@@ -41,7 +41,7 @@ export class Su {
       buntin.push(jihanlo);
       ting_ji_si_lomaji = si_lomaji(jihanlo[jihanlo.length - 1]);
     }
-    return buntin.join('');
+    return buntin.join("");
   }
 
   get lomaji(): string {
@@ -61,7 +61,7 @@ export class Su {
       buntin.push(jilomaji);
       ting_ji_si_lomaji = si_lomaji(jilomaji[jilomaji.length - 1]);
     }
-    return buntin.join('');
+    return buntin.join("");
   }
 
   get kiphanlo(): string {
@@ -80,7 +80,7 @@ export class Su {
       buntin.push(jihanlo);
       ting_ji_si_lomaji = si_lomaji(jihanlo[jihanlo.length - 1]);
     }
-    return buntin.join('');
+    return buntin.join("");
   }
 
   thiam(ji: Ji): void {
