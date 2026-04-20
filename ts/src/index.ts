@@ -1,0 +1,17 @@
+import { Ku, TuiBeTse } from './butkian/ku';
+import { normalize_taibun, 標點符號 as PIAUTIAM } from './butkian/kongiong';
+import { thiah, SuSiaTshoNgoo } from './susia/kongke';
+
+export { Ku, TuiBeTse, normalize_taibun, PIAUTIAM };
+
+export function kam_haphuat(tsit_ji_lomaji: string): boolean {
+  try {
+    thiah(tsit_ji_lomaji);
+  } catch (e) {
+    if (e instanceof SuSiaTshoNgoo) {
+      return false;
+    }
+    throw e;
+  }
+  return true;
+}
