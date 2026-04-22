@@ -2,7 +2,7 @@ export const LIAN_JI_HU = "-";
 export const KHIN_SIANN_HU = "--";
 
 // prettier-ignore
-export const 句中標點符號 = new Set([
+const 句中標點符號 = new Set([
   "、", "﹑", "､", "-", "—", "~", "～", "·", "‧",
   "'", "＇", '"', "‘", "’", "“", "”", "〝", "〞", "′", "‵",
   "「", "」", "｢", "｣", "『", "』", "【", "】", "〈", "〉",
@@ -12,38 +12,31 @@ export const 句中標點符號 = new Set([
   "―", "─", "──", "｜", "︱", "•",
 ]);
 
+// > 斷句是考慮著翻譯，閣有語音合成愛做的正規化
+// https://github.com/i3thuan5/KeSi/blob/master/kesi/butkian/kongiong.py#L23
 // prettier-ignore
-export const 斷句標點符號 = new Set([
+const 斷句標點符號 = new Set([
   "\n", "，", "。", "．", "！", "？", "…", "……",
   "...", ",", ".", "!", "?", "﹐", "﹒", "﹗", "﹖",
   ";", "；", "﹔",
 ]);
 
-export const HAGFA_TIAU = new Set(["", "ˊ", "ˋ", "ˇ", "+", "^"]);
-export const NGOO_SIU_LE: Record<string, string> = {
-  "0": "˙",
-  "1": "",
-  "2": "ˋ",
-  "3": "˪",
-  "4": "",
-  "5": "ˊ",
-  "6": "˫",
-  "7": "˫",
-  "8": "㆐",
-  "9": "^",
-  "10": "㆐",
-};
-
-const siannTiauValues = new Set([...HAGFA_TIAU, ...Object.values(NGOO_SIU_LE)]);
-siannTiauValues.delete("");
-export const 聲調符號 = siannTiauValues;
+export const 聲調符號 = new Set(
+  // prettier-ignore
+  [
+    // Hakka tones
+    /* "", */ "ˊ", "ˋ", "ˇ", "+", "^",
+    // Taigi tones, 0~10
+    "˙", /* "", */ "ˋ", "˪", /* "", */ "ˊ", "˫", "˫", "㆐", "^", "㆐",
+],
+);
 
 export const 標點符號 = new Set([...句中標點符號, ...斷句標點符號]);
 
 export const 組字式符號 = "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿿";
 
-export function si_lomaji(jiguan: string): boolean {
-  return 敢是拼音字元(jiguan) || /^[0-9]$/.test(jiguan);
+export function si_lomaji(char: string): boolean {
+  return 敢是拼音字元(char) || /^[0-9]$/.test(char);
 }
 
 export function 敢是拼音字元(字元: string): boolean {
