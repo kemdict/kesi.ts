@@ -56,12 +56,11 @@ export function 敢是拼音字元(char: string): boolean {
   );
 }
 
-export function 敢是注音符號(字元: string): boolean {
-  // Bopomofo: U+3100–U+312F, Bopomofo Extended: U+31A0–U+31BF
-  const code = 字元.charCodeAt(0);
-  return (
-    (code >= 0x3100 && code <= 0x312f) || (code >= 0x31a0 && code <= 0x31bf)
-  );
+export function 敢是注音符號(char: string): boolean {
+  // NOTE: this is slightly different from i3thuan5/KeSi: they test if the
+  // character has a name that starts with "BOPOMOFO LETTER", which excludes
+  // BOPOMOFO FINAL LETTER characters. That sounds unintentional to me.
+  return /^\p{Script=Bopomofo}$/v.test(char);
 }
 
 export function normalize_taibun(taibun: string): string {
