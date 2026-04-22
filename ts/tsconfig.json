@@ -12,6 +12,7 @@
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "allowImportingTsExtensions": true,
+    "noEmit": true,
     "moduleDetection": "force"
   },
   "exclude": ["test", "node_modules", "dist"]
