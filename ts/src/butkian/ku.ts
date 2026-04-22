@@ -7,7 +7,7 @@ import {
   LIAN_JI_HU,
   si_lomaji,
   normalize_taibun,
-} from "./kongiong";
+} from "./kongiong.ts";
 import { Su } from "./su.ts";
 import { Ji } from "./ji.ts";
 
@@ -242,7 +242,8 @@ export class Ku {
     let 頂一个是注音符號 = false;
     let 位置 = 0;
     while (位置 < 語句.length) {
-      const 字 = 語句[位置];
+      const codePoint = 語句.codePointAt(位置)!;
+      const 字 = String.fromCodePoint(codePoint);
       let 是連字符 = false;
       let 是空白 = false;
       let 是輕聲符號 = false;
@@ -284,7 +285,7 @@ export class Ku {
               狀態.頂一字佮這馬的字無仝詞();
             }
           }
-          位置 += 分字長度 - 1;
+          位置 += 分字長度 - 字.length;
         } else if (Ku._是空白.test(字)) {
           狀態.這馬字好矣清掉囥入去字陣列();
           狀態.頂一字佮這馬的字無仝詞();
@@ -350,7 +351,7 @@ export class Ku {
             狀態.頂一字佮這馬的字無仝詞();
             狀態.字陣列直接加一字(符號);
             狀態.頂一字佮這馬的字無仝詞();
-            位置 += 符號.length - 1;
+            位置 += 符號.length - 字.length;
           } else {
             狀態.這馬字好矣清掉囥入去字陣列();
             狀態.頂一字佮這馬的字無仝詞();
@@ -378,8 +379,9 @@ export class Ku {
           }
         }
       }
-      位置 += 1;
+      位置 += 字.length;
       頂一个字 = 字;
+
       頂一个是連字符 = 是連字符;
       頂一个是空白 = 是空白;
       頂一个是輕聲符號 = 是輕聲符號;
