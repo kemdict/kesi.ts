@@ -1,7 +1,7 @@
 {
   "name": "kesi",
   "version": "1.0.0",
-  "description": "",
+  "description": "Taiwanese orthography conversion",
   "type": "module",
   "main": "index.js",
   "scripts": {
