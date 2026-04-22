@@ -42,15 +42,17 @@ export function si_lomaji(char: string): boolean {
   return 敢是拼音字元(char) || /^[0-9]$/.test(char);
 }
 
-export function 敢是拼音字元(字元: string): boolean {
-  if (字元 === "ⁿ" || 字元 === "'" || 字元 === "_" || 字元 === "ᴺ") {
-    return true;
-  }
-  // Check for Ll, Lu, Mn using regex Unicode property escapes
-  // \p{L} is Letter, \p{Ll} is lowercase letter, \p{Lu} is uppercase letter
-  // \p{Mn} is Nonspacing Mark (accents)
+export function 敢是拼音字元(char: string): boolean {
   return (
-    /^\p{Ll}$/u.test(字元) || /^\p{Lu}$/u.test(字元) || /^\p{Mn}$/u.test(字元)
+    char === "ⁿ" ||
+    char === "'" ||
+    char === "_" ||
+    char === "ᴺ" ||
+    // Check for Ll, Lu, Mn using regex Unicode property escapes
+    // \p{L} is Letter, \p{Ll} is lowercase letter, \p{Lu} is uppercase letter
+    // \p{Mn} is Nonspacing Mark (accents)
+    // Ll: 小寫, Lu: 大寫, Mn: 有調號英文
+    /^[\p{Ll}\p{Lu}\p{Mn}]$/v.test(char)
   );
 }
 
