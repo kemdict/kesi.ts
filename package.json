@@ -1,17 +1,25 @@
 {
   "name": "kesi",
-  "version": "1.0.0",
-  "description": "Taiwanese orthography conversion",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "test": "bun test",
-    "build": "bun build src/index.ts --outdir dist"
+  "description": "Conversion between POJ and Tailo, and other Taiwanese NLP tools. A port of Ithuan Technology's KeSi",
+  "version": "0.1.0",
+  "author": "Tshuà Bûn-lī <ithuan@ithuan.tw>",
+  "maintainers": ["Kisaragi Hiu <mail@kisaragi-hiu.com>"],
+  "homepage": "http://github.com/kemdict/kesi",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/kemdict/kesi.git"
   },
-  "keywords": [],
-  "author": "",
-  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "files": ["dist"],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/kemdict/kesi/blob/master/LICENSE"
+    }
+  ],
   "devDependencies": {
     "@types/node": "^25.6.0"
-  }
+  },
+  "keywords": ["taigi", "taiwanese", "orthography"]
 }
