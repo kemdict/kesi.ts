@@ -33,7 +33,10 @@ export const 聲調符號 = new Set(
 
 export const 標點符號 = new Set([...句中標點符號, ...斷句標點符號]);
 
-export const 組字式符號 = "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿿";
+// All Ideographic Description Characters, including the new ones added in
+// Unicode 15.1: U+2FFC~U+2FFF and the two other characters that don't fit in
+// the block (U+303E, U+31EF).
+export const 組字式符號 = "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿〾㇯";
 
 export function si_lomaji(char: string): boolean {
   return 敢是拼音字元(char) || /^[0-9]$/.test(char);
