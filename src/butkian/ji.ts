@@ -8,7 +8,7 @@ export class Ji {
 
   constructor(
     hanlo: string,
-    lomaji: string | null = null,
+    lomaji: string | undefined = undefined,
     si_khinsiann: boolean = false,
   ) {
     if (si_khinsiann) {
@@ -17,9 +17,9 @@ export class Ji {
       this.hanlo = hanlo;
     }
 
-    if (lomaji !== null && si_khinsiann) {
+    if (lomaji !== undefined && si_khinsiann) {
       this.lomaji = `--${lomaji}`;
-    } else if (lomaji !== null) {
+    } else if (lomaji !== undefined) {
       this.lomaji = lomaji;
     } else {
       this.lomaji = this.hanlo;

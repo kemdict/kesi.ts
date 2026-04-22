@@ -1,3 +1,5 @@
+.PHONY: test build
+
 test:
 	bun test
 

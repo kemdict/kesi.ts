@@ -35,24 +35,27 @@ export class Ku {
   static readonly _是數字 = new Set("0123456789".split(""));
   static readonly _是多字元標點 = /^(\.\.\.)|(……)|(──)/;
 
-  constructor(hanlo: string | null = null, lomaji: string | null = null) {
+  constructor(
+    hanlo: string | undefined = undefined,
+    lomaji: string | undefined = undefined,
+  ) {
     let h = hanlo;
     let l = lomaji;
-    if (h !== null) {
+    if (h !== undefined) {
       h = normalize_taibun(h);
     }
-    if (l !== null) {
+    if (l !== undefined) {
       l = normalize_taibun(l);
     }
 
-    if (h === null) {
+    if (h === undefined) {
       h = l;
-      l = null;
+      l = undefined;
     }
 
-    if (h === null) {
+    if (h === undefined) {
       this._su = [];
-    } else if (l === null) {
+    } else if (l === undefined) {
       const [tngji, tngji_khinsiann, si_bokangsu] = this._hunsik_tngji_tngsu(h);
       const [bun, khinsiann] = this._tngsu(tngji, tngji_khinsiann, si_bokangsu);
       this._su = this._bun_tsuan_sutin(bun, khinsiann);
@@ -108,7 +111,7 @@ export class Ku {
       const khinsiann = khinsiann_tin[i];
       const su = new Su();
       for (let j = 0; j < tsitsu.length; j++) {
-        su.thiam(new Ji(tsitsu[j], null, khinsiann[j]));
+        su.thiam(new Ji(tsitsu[j], undefined, khinsiann[j]));
       }
       sutin.push(su);
     }
@@ -207,7 +210,7 @@ export class Ku {
   private _tngsu(
     字陣列: string[],
     輕聲陣列: boolean[],
-    佮後一个字無仝一个詞: (boolean | null)[],
+    佮後一个字無仝一个詞: (boolean | undefined)[],
   ): [string[][], boolean[][]] {
     const 巢狀詞陣列: string[][] = [];
     const 巢狀輕聲陣列: boolean[][] = [];
@@ -230,12 +233,12 @@ export class Ku {
 
   private _hunsik_tngji_tngsu(
     語句: string,
-  ): [string[], boolean[], (boolean | null)[]] {
+  ): [string[], boolean[], (boolean | undefined)[]] {
     const 狀態 = new _分析狀態();
     if (Ku._是空白.test(語句)) {
       return 狀態.分析結果();
     }
-    let 頂一个字: string | null = null;
+    let 頂一个字: string | undefined = undefined;
     let 頂一个是連字符 = false;
     let 頂一个是空白 = false;
     let 頂一个是輕聲符號 = false;
@@ -302,7 +305,7 @@ export class Ku {
           是空白 = true;
         } else if (敢是拼音字元(字)) {
           if (
-            頂一个字 !== null &&
+            頂一个字 !== undefined &&
             !敢是拼音字元(頂一个字) &&
             !Ku._是數字.has(頂一个字)
           ) {
@@ -315,7 +318,7 @@ export class Ku {
           狀態.這馬字加一个字元(字);
         } else if (Ku._是數字.has(字)) {
           if (
-            頂一个字 !== null &&
+            頂一个字 !== undefined &&
             !Ku._是數字.has(頂一个字) &&
             !敢是拼音字元(頂一个字) &&
             !頂一个是注音符號
@@ -326,13 +329,13 @@ export class Ku {
           狀態.這馬字加一个字元(字);
         } else if (
           聲調符號.has(字) &&
-          頂一个字 !== null &&
+          頂一个字 !== undefined &&
           敢是拼音字元(頂一个字)
         ) {
           狀態.這馬字加一个字元(字);
         } else if (是注音符號) {
           if (
-            頂一个字 !== null &&
+            頂一个字 !== undefined &&
             !聲調符號.has(頂一个字) &&
             !頂一个是注音符號
           ) {
@@ -362,7 +365,7 @@ export class Ku {
           if (狀態.這馬字敢全部攏數字()) {
             狀態.這馬字好矣清掉囥入去字陣列();
             狀態.頂一字佮這馬的字無仝詞();
-          } else if (頂一个字 !== null && 敢是拼音字元(頂一个字)) {
+          } else if (頂一个字 !== undefined && 敢是拼音字元(頂一个字)) {
             狀態.這馬字好矣清掉囥入去字陣列();
             狀態.頂一字佮這馬的字無仝詞();
           } else {
@@ -411,7 +414,7 @@ export class Ku {
 class _分析狀態 {
   private _字陣列: string[] = [];
   private _輕聲陣列: boolean[] = [];
-  private _佮後一个字無仝一个詞: (boolean | null)[] = [];
+  private _佮後一个字無仝一个詞: (boolean | undefined)[] = [];
   private _模式: "一般" | "組字" = "一般";
   private _組字長度: number = 0;
   private _這馬字: string = "";
@@ -423,7 +426,7 @@ class _分析狀態 {
     this.變一般模式();
   }
 
-  分析結果(): [string[], boolean[], (boolean | null)[]] {
+  分析結果(): [string[], boolean[], (boolean | undefined)[]] {
     return [this._字陣列, this._輕聲陣列, this._佮後一个字無仝一个詞];
   }
 
@@ -491,7 +494,7 @@ class _分析狀態 {
   字陣列直接加一字(字: string): void {
     this._字陣列.push(字);
     this._輕聲陣列.push(false);
-    this._佮後一个字無仝一个詞.push(null);
+    this._佮後一个字無仝一个詞.push(undefined);
   }
 
   這馬字好矣清掉囥入去字陣列(): void {
@@ -505,7 +508,7 @@ class _分析狀態 {
       }
       this._字陣列.push(this._這馬字);
       this._輕聲陣列.push(this._這馬是輕聲字);
-      this._佮後一个字無仝一个詞.push(null);
+      this._佮後一个字無仝一个詞.push(undefined);
       this._這馬字 = "";
       this._這馬是輕聲字 = false;
     }
@@ -525,7 +528,7 @@ class _分析狀態 {
     if (this._佮後一个字無仝一个詞.length > 0) {
       if (
         this._佮後一个字無仝一个詞[this._佮後一个字無仝一个詞.length - 1] ===
-        null
+        undefined
       ) {
         this._佮後一个字無仝一个詞[this._佮後一个字無仝一个詞.length - 1] =
           true;
