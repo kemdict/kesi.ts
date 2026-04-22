@@ -19,9 +19,6 @@ export const 斷句標點符號 = new Set([
   ";", "；", "﹔",
 ]);
 
-export const NON_PRINTABLE_CHARS =
-  /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f]/g;
-
 export const HAGFA_TIAU = new Set(["", "ˊ", "ˋ", "ˇ", "+", "^"]);
 export const NGOO_SIU_LE: Record<string, string> = {
   "0": "˙",
@@ -35,18 +32,6 @@ export const NGOO_SIU_LE: Record<string, string> = {
   "8": "㆐",
   "9": "^",
   "10": "㆐",
-};
-
-export const KIP_TSOJI: Record<string, string> = {
-  "\uE701": "\u{2A736}",
-  "\uF5E9": "\u{2B74F}",
-  "\uE35C": "\u{2B75B}",
-  "\uF5EA": "\u{2B77A}",
-  "\uF5EE": "\u{2B77B}",
-  "\uE703": "\u{2B7BC}",
-  "\uF5EF": "\u{2B7C2}",
-  "\uE705": "\u{2C9B0}",
-  "\uF5E7": "\u{308FB}",
 };
 
 const siannTiauValues = new Set([...HAGFA_TIAU, ...Object.values(NGOO_SIU_LE)]);
@@ -81,17 +66,25 @@ export function 敢是注音符號(字元: string): boolean {
   );
 }
 
-export function normalize_kautian(taibun: string): string {
-  let result = taibun;
-  for (const [ji_kautian, ji_unicode] of Object.entries(KIP_TSOJI)) {
-    result = result.split(ji_kautian).join(ji_unicode);
-  }
-  return result;
-}
-
 export function normalize_taibun(taibun: string): string {
-  let result = taibun.replace(NON_PRINTABLE_CHARS, " ");
-  result = normalize_kautian(result);
-  result = result.normalize("NFC");
-  return result;
+  // Replace non-printable characters
+  let result = taibun.replace(
+    /[\u0000-\u0008\u000b\u000c\u000e-\u001f\u007f-\u009f]/g,
+    " ",
+  );
+  // Replace old MOE private characters with their counterparts in Unicode
+  for (const [ji_kautian, ji_unicode] of Object.entries({
+    "\uE701": "\u{2A736}", // 𪜶
+    "\uF5E9": "\u{2B74F}", // 𫝏
+    "\uE35C": "\u{2B75B}", // 𫝛
+    "\uF5EA": "\u{2B77A}", // 𫝺
+    "\uF5EE": "\u{2B77B}", // 𫝻
+    "\uE703": "\u{2B7BC}", // 𫞼
+    "\uF5EF": "\u{2B7C2}", // 𫟂
+    "\uE705": "\u{2C9B0}", // 𬦰
+    "\uF5E7": "\u{308FB}", // 𰣻
+  })) {
+    result = result.replaceAll(ji_kautian, ji_unicode);
+  }
+  return result.normalize("NFC");
 }
