@@ -78,12 +78,8 @@ export function theh_sianntiau(lomaji: string): [string, string] {
 }
 
 export function thong_n(siannun: string): string {
-  let phinnim = siannun.replace(/([a-z])(N)(h?)/gi, (match, p1, p2, p3) => {
-    // In Python it was re.sub('([a-z])(N)(h?)', r'\1ⁿ\3', siannun)
-    // The 'i' flag is not there in python, but siannun might be mixed case
-    // Actually Python code: phinnim = re.sub('([a-z])(N)(h?)', r'\1ⁿ\3', siannun)
-    // It matches lowercase letter followed by uppercase N.
-    return p1 + "ⁿ" + p3;
+  let phinnim = siannun.replace(/([a-z])(N)(h?)/g, (_match, $1, _2, $3) => {
+    return $1 + "ⁿ" + $3;
   });
   phinnim = phinnim.replace(/ᴺ/g, "ⁿ");
   return phinnim;
