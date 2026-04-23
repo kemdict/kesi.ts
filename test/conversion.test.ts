@@ -1,4 +1,4 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect } from "bun:test";
 import { Ku } from "../src/butkian/ku.ts";
 
 describe("Conversion", () => {
