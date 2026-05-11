@@ -71,18 +71,18 @@ export function thiah(lomaji: string): [string, string, string, string] {
 
 export function theh_sianntiau(lomaji: string): [string, string] {
   const nfd = lomaji.normalize("NFD");
-  // Numerical tone
+  // Guân-té tō sòo-jī-tiāu
   const lastChar = nfd.slice(-1);
   if (lastChar in TIAUHO_TIAUHU_PIO) {
     return [nfd.slice(0, -1), TIAUHO_TIAUHU_PIO[lastChar]];
   }
-  // Traditional tone
+  // Thuân-thóng-tiāu
   const pitui = /[\u0301\u0300\u0302\u030c\u0304\u030d\u030b\u0306]/.exec(nfd);
   let tiau = "";
   if (pitui) {
     tiau = pitui[0];
   }
-  const siannun = nfd.replace(tiau, "");
+  const siannun = nfd.replaceAll(tiau, "");
   return [siannun, tiau];
 }
 
