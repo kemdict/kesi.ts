@@ -1,5 +1,17 @@
 import { KONGKE_SIANNBO, KONGKE_UNBO } from "./pio.ts";
 
+/**
+ * True if all cased characters (Unicode general category Lu, Ll, or Lt) are
+ * uppercase, and there is at least one cased character.
+ * Port of Python str.isupper.
+ * This is here because we need "O͘" to be SI_THAU_TUASIA, so the O should be
+ * treated as upper case but the dot should be treated as not. Naive
+ * implementations with toUpperCase/toLowerCase + equality will fail at this.
+ */
+function isupper(str: string) {
+  return /[\p{Lu}\p{Ll}\p{Lt}]/v.test(str) && !/[\p{Ll}\p{Lt}]/v.test(str);
+}
+
 export const SI_TSUAN_TUASIA = "SI_TSUAN_TUASIA";
 export const SI_TSUAN_SIOSIA = "SI_TSUAN_SIOSIA";
 export const SI_THAU_TUASIA = "SI_THAU_TUASIA";
@@ -27,10 +39,7 @@ export function khuann_tuasiosia(bun: string): string {
   const latin = bun.replace(/ⁿ/g, "");
   if (latin === latin.toLowerCase()) {
     return SI_TSUAN_SIOSIA;
-  } else if (
-    /^[A-Z]/.test(latin) &&
-    latin.slice(1) === latin.slice(1).toLowerCase()
-  ) {
+  } else if (isupper(latin.slice(0, 1)) && !isupper(latin.slice(1))) {
     return SI_THAU_TUASIA;
   } else {
     return SI_TSUAN_TUASIA;
@@ -62,18 +71,18 @@ export function thiah(lomaji: string): [string, string, string, string] {
 
 export function theh_sianntiau(lomaji: string): [string, string] {
   const nfd = lomaji.normalize("NFD");
-  // Numerical tone
+  // Guân-té tō sòo-jī-tiāu
   const lastChar = nfd.slice(-1);
   if (lastChar in TIAUHO_TIAUHU_PIO) {
     return [nfd.slice(0, -1), TIAUHO_TIAUHU_PIO[lastChar]];
   }
-  // Traditional tone
+  // Thuân-thóng-tiāu
   const pitui = /[\u0301\u0300\u0302\u030c\u0304\u030d\u030b\u0306]/.exec(nfd);
   let tiau = "";
   if (pitui) {
     tiau = pitui[0];
   }
-  const siannun = nfd.replace(tiau, "");
+  const siannun = nfd.replaceAll(tiau, "");
   return [siannun, tiau];
 }
 
