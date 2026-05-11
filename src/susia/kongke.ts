@@ -1,5 +1,17 @@
 import { KONGKE_SIANNBO, KONGKE_UNBO } from "./pio.ts";
 
+/**
+ * True if all cased characters (Unicode general category Lu, Ll, or Lt) are
+ * uppercase, and there is at least one cased character.
+ * Port of Python str.isupper.
+ * This is here because we need "O͘" to be SI_THAU_TUASIA, so the O should be
+ * treated as upper case but the dot should be treated as not. Naive
+ * implementations with toUpperCase/toLowerCase + equality will fail at this.
+ */
+function isupper(str: string) {
+  return /[\p{Lu}\p{Ll}\p{Lt}]/v.test(str) && !/[\p{Ll}\p{Lt}]/v.test(str);
+}
+
 export const SI_TSUAN_TUASIA = "SI_TSUAN_TUASIA";
 export const SI_TSUAN_SIOSIA = "SI_TSUAN_SIOSIA";
 export const SI_THAU_TUASIA = "SI_THAU_TUASIA";
@@ -27,10 +39,7 @@ export function khuann_tuasiosia(bun: string): string {
   const latin = bun.replace(/ⁿ/g, "");
   if (latin === latin.toLowerCase()) {
     return SI_TSUAN_SIOSIA;
-  } else if (
-    /^[A-Z]/.test(latin) &&
-    latin.slice(1) !== latin.slice(1).toUpperCase()
-  ) {
+  } else if (isupper(latin.slice(0, 1)) && !isupper(latin.slice(1))) {
     return SI_THAU_TUASIA;
   } else {
     return SI_TSUAN_TUASIA;
