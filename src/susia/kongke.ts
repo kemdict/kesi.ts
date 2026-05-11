@@ -29,7 +29,7 @@ export function khuann_tuasiosia(bun: string): string {
     return SI_TSUAN_SIOSIA;
   } else if (
     /^[A-Z]/.test(latin) &&
-    latin.slice(1) === latin.slice(1).toLowerCase()
+    latin.slice(1) !== latin.slice(1).toUpperCase()
   ) {
     return SI_THAU_TUASIA;
   } else {
