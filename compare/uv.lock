@@ -1,0 +1,23 @@
+version = 1
+revision = 3
+requires-python = ">=3.14"
+
+[[package]]
+name = "compare"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "kesi" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "kesi", specifier = ">=1.6.0" }]
+
+[[package]]
+name = "kesi"
+version = "1.6.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/be/2c/58f03ddbce6548eb5c2939584a0ce91e6842223fdea4de5c045eafc56399/KeSi-1.6.0.tar.gz", hash = "sha256:25e097094c0cb40785c61239f46ecdd75d688baeb4dbcc53a8f1be978cc56cbe", size = 12049, upload-time = "2023-08-29T05:20:27.989Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/08/c2/c5e03a9f507011241723e2d31a6ee2a2855b5d3b9badf8cca5b4f7c6695f/KeSi-1.6.0-py3-none-any.whl", hash = "sha256:6c03a10a4dbe75ddb98dfd44254f7cb01c9435e83636dbceb753b05978a6e8f6", size = 13099, upload-time = "2023-08-29T05:20:26.542Z" },
+]
