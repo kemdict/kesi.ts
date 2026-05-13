@@ -11,6 +11,8 @@ import {
 import { Su } from "./su.ts";
 import { Ji } from "./ji.ts";
 
+const lianji_regexp = new RegExp(`^[${LIAN_JI_HU}]+`);
+
 export class TuiBeTse extends Error {
   constructor(message: string) {
     super(message);
@@ -261,9 +263,7 @@ export class Ku {
         }
       } else if (狀態.是一般模式()) {
         // re.match is from current position
-        const lianji_match = new RegExp(`^[${LIAN_JI_HU}]+`).exec(
-          語句.slice(位置),
-        );
+        const lianji_match = lianji_regexp.exec(語句.slice(位置));
         if (lianji_match) {
           狀態.這馬字好矣清掉囥入去字陣列();
           const 分字長度 = lianji_match[0].length;
