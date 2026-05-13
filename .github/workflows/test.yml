@@ -3,7 +3,7 @@ name: Test
 on:
   push:
     branches:
-      - ts
+      - main
   workflow_dispatch:
 
 permissions:
