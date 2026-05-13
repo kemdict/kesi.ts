@@ -22,6 +22,7 @@ jobs:
         with:
           version: 11
           cache: true
+          run_install: true
       - name: Test
         run: |
           npm run test
