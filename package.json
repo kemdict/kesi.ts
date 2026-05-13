@@ -13,7 +13,7 @@
   "homepage": "http://github.com/kemdict/kesi",
   "repository": {
     "type": "git",
-    "url": "http://github.com/kemdict/kesi.git"
+    "url": "git+http://github.com/kemdict/kesi.git"
   },
   "type": "module",
   "main": "./dist/index.js",
@@ -38,15 +38,17 @@
     "test": "vitest run",
     "test:bdd": "cucumber-js"
   },
+  "license": "MIT",
   "licenses": [
     {
       "type": "MIT",
-      "url": "http://github.com/kemdict/kesi/blob/master/LICENSE"
+      "url": "http://github.com/kemdict/kesi/blob/main/LICENSE"
     }
   ],
   "devDependencies": {
     "@cucumber/cucumber": "^12.8.1",
     "@types/node": "^25.7.0",
+    "publint": "^0.3.21",
     "typescript": "^6.0.3",
     "vitest": "^4.1.6"
   },
