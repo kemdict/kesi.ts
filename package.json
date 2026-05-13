@@ -3,7 +3,9 @@
   "description": "Conversion between POJ and Tailo, and other Taiwanese NLP tools. A port of Ithuan Technology's KeSi",
   "version": "0.1.0",
   "author": "Tshuà Bûn-lī <ithuan@ithuan.tw>",
-  "maintainers": ["Kisaragi Hiu <mail@kisaragi-hiu.com>"],
+  "maintainers": [
+    "Kisaragi Hiu <mail@kisaragi-hiu.com>"
+  ],
   "homepage": "http://github.com/kemdict/kesi",
   "repository": {
     "type": "git",
