@@ -19,7 +19,7 @@ jobs:
       - uses: pnpm/action-setup@v6
         with:
           version: 11
-          cache: true
+          cache: false
           run_install: true
       - name: Test
         run: |
