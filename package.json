@@ -15,7 +15,7 @@
   "main": "./dist/index.js",
   "files": ["dist"],
   "scripts": {
-    "build": "tsgo",
+    "build": "tsc",
     "test": "vitest run",
     "test:bdd": "cucumber-js"
   },
@@ -27,7 +27,13 @@
   ],
   "devDependencies": {
     "@cucumber/cucumber": "^12.8.1",
+    "@types/node": "^25.7.0",
+    "typescript": "^6.0.3",
     "vitest": "^4.1.6"
   },
-  "keywords": ["taigi", "taiwanese", "orthography"]
+  "keywords": [
+    "taigi",
+    "taiwanese",
+    "orthography"
+  ]
 }

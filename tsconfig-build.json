@@ -1,0 +1,14 @@
+{
+  // Settings for build. The base file should still
+  // apply to other files during editing.
+  "extends": "./tsconfig",
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "noEmit": false,
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true
+  },
+  "include": ["src/**/*"]
+}
