@@ -20,12 +20,6 @@ bun install @kemdict/kesi
 
 ## Usage
 
-## Usage
-
-## Usage
-
-## Usage
-
 Exactly like upstream.
 
 ```typescript
