@@ -6,7 +6,23 @@ Convert between traditional POJ and Ministry of Education's Tailo.
 
 ## Install
 
-I intend to publish this to npm.
+```bash
+npm install @kemdict/kesi
+```
+
+```bash
+pnpm add @kemdict/kesi
+```
+
+```bash
+bun install @kemdict/kesi
+```
+
+## Usage
+
+## Usage
+
+## Usage
 
 ## Usage
 
