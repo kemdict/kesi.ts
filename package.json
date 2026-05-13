@@ -1,11 +1,15 @@
 {
-  "name": "kesi",
+  "name": "@kemdict/kesi",
   "description": "Conversion between POJ and Tailo, and other Taiwanese NLP tools. A port of Ithuan Technology's KeSi",
   "version": "0.1.0",
-  "author": "Tshuà Bûn-lī <ithuan@ithuan.tw>",
-  "maintainers": [
+  "//": "Messy setup for this port. Tshuà Bûn-lī is the original author but not the one responsible for this package. Should it be me or them in the author field?",
+  "author": "Kisaragi Hiu <mail@kisaragi-hiu.com>",
+  "///": "The setup here is similar to what's suggested at https://stackoverflow.com/questions/54391303.",
+  "contributors": [
+    "Tshuà Bûn-lī <ithuan@ithuan.tw>",
     "Kisaragi Hiu <mail@kisaragi-hiu.com>"
   ],
+  "maintainers": ["Kisaragi Hiu <mail@kisaragi-hiu.com>"],
   "homepage": "http://github.com/kemdict/kesi",
   "repository": {
     "type": "git",
@@ -13,9 +17,24 @@
   },
   "type": "module",
   "main": "./dist/index.js",
-  "files": ["dist"],
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "////": "Also including src for reference",
+  "files": [
+    "src",
+    "tsconfig.json",
+    "dist",
+    "README.md",
+    "LICENSE",
+    "package.json"
+  ],
   "scripts": {
-    "build": "tsc",
+    "build": "tsc -p tsconfig-build.json",
     "test": "vitest run",
     "test:bdd": "cucumber-js"
   },
@@ -31,9 +50,5 @@
     "typescript": "^6.0.3",
     "vitest": "^4.1.6"
   },
-  "keywords": [
-    "taigi",
-    "taiwanese",
-    "orthography"
-  ]
+  "keywords": ["taigi", "taiwanese", "orthography"]
 }
