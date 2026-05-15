@@ -13,7 +13,7 @@
   "homepage": "http://github.com/kemdict/kesi",
   "repository": {
     "type": "git",
-    "url": "git+http://github.com/kemdict/kesi.git"
+    "url": "git+http://github.com/kemdict/kesi.ts.git"
   },
   "type": "module",
   "main": "./dist/index.js",
