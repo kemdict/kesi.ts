@@ -10,10 +10,10 @@
     "Kisaragi Hiu <mail@kisaragi-hiu.com>"
   ],
   "maintainers": ["Kisaragi Hiu <mail@kisaragi-hiu.com>"],
-  "homepage": "http://github.com/kemdict/kesi",
+  "homepage": "https://github.com/kemdict/kesi.ts",
   "repository": {
     "type": "git",
-    "url": "git+http://github.com/kemdict/kesi.ts.git"
+    "url": "https://github.com/kemdict/kesi.ts"
   },
   "type": "module",
   "main": "./dist/index.js",
