@@ -1,7 +1,7 @@
 {
   "name": "@kemdict/kesi",
   "description": "Conversion between POJ and Tailo, and other Taiwanese NLP tools. A port of Ithuan Technology's KeSi",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "//": "Messy setup for this port. Tshuà Bûn-lī is the original author but not the one responsible for this package. Should it be me or them in the author field?",
   "author": "Kisaragi Hiu <mail@kisaragi-hiu.com>",
   "///": "The setup here is similar to what's suggested at https://stackoverflow.com/questions/54391303.",
