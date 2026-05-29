@@ -1,5 +1,9 @@
 # @kemdict/kesi changelog
 
+## v0.3.1
+
+- Fix newlines being removed in output
+
 ## v0.3.0
 
 - Add a CLI for easier conversion
