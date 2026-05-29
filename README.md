@@ -34,6 +34,10 @@ new Ku("Guá m̄ tsai-iánn tse sī beh按怎tsò.").POJ().hanlo
 // -> "Góa m̄ chai-iáⁿ che sī beh按怎chò."
 ```
 
+### Differences
+
+- `si_lomaji` is public
+
 ## 其他
 
 ### 算字數
