@@ -34,6 +34,7 @@ Options:
     if (parsedArgs.values.count) {
       err("Please only specify either --to <kip|poj> or --count");
     }
+    // silently accept "tl" as an alternative of "kip"
     if (!["kip", "poj", "tl"].includes(parsedArgs.values.to!)) {
       err('--to needs to be either "kip" or "poj"');
     }
