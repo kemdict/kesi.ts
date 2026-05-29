@@ -1,10 +1,19 @@
+import { existsSync } from "node:fs";
 import { Ku } from "./index.ts";
 import * as readline from "node:readline";
 import { parseArgs } from "node:util";
+import { createReadStream } from "node:fs";
 
 function err(msg: string) {
   console.error(msg);
   process.exit(1);
+}
+
+function getInputStream(path?: string) {
+  if (!path) return process.stdin;
+  if (path === "-") return process.stdin;
+  if (!existsSync(path)) err("Failed to get input stream");
+  return createReadStream(path);
 }
 
 async function main() {
@@ -39,7 +48,8 @@ Options:
       err('--to needs to be either "kip" or "poj"');
     }
     const to = parsedArgs.values.to as "kip" | "poj" | "tl";
-    const rl = readline.createInterface(process.stdin);
+    const inputStream = getInputStream(parsedArgs.values.input);
+    const rl = readline.createInterface(inputStream);
     for await (const line of rl) {
       if (to === "poj") {
         process.stdout.write(new Ku(line).POJ().hanlo);
@@ -54,7 +64,8 @@ Options:
     // FIXME this counts commas as a syllable.
     // (The original sng_jisoo.py also does this)
     let count = 0;
-    const rl = readline.createInterface(process.stdin);
+    const inputStream = getInputStream(parsedArgs.values.input);
+    const rl = readline.createInterface(inputStream);
     for await (const line of rl) {
       count += [...new Ku(line.trimEnd()).thianji()].length;
     }
