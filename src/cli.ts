@@ -38,16 +38,26 @@ Options:
       err('--to needs to be either "kip" or "poj"');
     }
     const to = parsedArgs.values.to as "kip" | "poj" | "tl";
+    const rl = readline.createInterface(process.stdin);
+    for await (const line of rl) {
+      if (to === "poj") {
+        process.stdout.write(new Ku(line).KIP().hanlo);
+      } else {
+        process.stdout.write(new Ku(line).POJ().hanlo);
+      }
+    }
   } else if (parsedArgs.values.count) {
     if (!parsedArgs.values.to && !parsedArgs.values.count) {
       err("Either --to <kip|poj> or --count has to be specified");
     }
-    const rl = readline.createInterface(process.stdin);
+    // FIXME this counts commas as a syllable.
+    // (The original sng_jisoo.py also does this)
     let count = 0;
+    const rl = readline.createInterface(process.stdin);
     for await (const line of rl) {
       count += [...new Ku(line.trimEnd()).thianji()].length;
     }
-    console.log(count);
+    process.stdout.write(`${count}\n`);
   } else {
     err("Either --to <kip|poj> or --count has to be specified");
   }
