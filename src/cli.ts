@@ -42,9 +42,9 @@ Options:
     const rl = readline.createInterface(process.stdin);
     for await (const line of rl) {
       if (to === "poj") {
-        process.stdout.write(new Ku(line).KIP().hanlo);
-      } else {
         process.stdout.write(new Ku(line).POJ().hanlo);
+      } else {
+        process.stdout.write(new Ku(line).KIP().hanlo);
       }
     }
   } else if (parsedArgs.values.count) {
