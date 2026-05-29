@@ -34,15 +34,18 @@ new Ku("Guá m̄ tsai-iánn tse sī beh按怎tsò.").POJ().hanlo
 // -> "Góa m̄ chai-iáⁿ che sī beh按怎chò."
 ```
 
+For the CLI:
+
+```sh
+npx @kemdict/kesi --input text-input.txt --to kip # "tl" has the same effect
+npx @kemdict/kesi --input text-input.txt --to poj
+npx @kemdict/kesi --input text-input.txt --to poj --output output.txt # instead of stdout
+echo goá | npx @kemdict/kesi --to kip # read from stdin
+npx @kemdict/kesi -i text-input.txt --count # count syllables
+echo "我是Tâi-gí ê ke-si" | npx @kemdict/kesi --count # -> 7
+```
+
 ### Differences
 
 - `si_lomaji` is public
-
-## 其他
-
-### 算字數
-
-```bash
-$ echo "我是Tâi-gí ê ke-si" | node le/sng_jisoo.ts
-# 字數=7
-```
+- This provides a CLI
