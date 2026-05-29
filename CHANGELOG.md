@@ -1,5 +1,9 @@
 # @kemdict/kesi changelog
 
+## v0.3.0
+
+- Add a CLI for easier conversion
+
 ## v0.2.0
 
 - Add some docstrings

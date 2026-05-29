@@ -16,6 +16,10 @@
     "url": "https://github.com/kemdict/kesi.ts"
   },
   "type": "module",
+  "////": "Use this binary name to avoid accidentally running the unrelated package called 'kesi'",
+  "bin": {
+    "kemdict-kesi": "dist/cli.js"
+  },
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
