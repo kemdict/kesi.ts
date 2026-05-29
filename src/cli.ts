@@ -2,7 +2,7 @@ import { existsSync } from "node:fs";
 import { Ku } from "./index.ts";
 import * as readline from "node:readline";
 import { parseArgs } from "node:util";
-import { createReadStream } from "node:fs";
+import { createReadStream, createWriteStream } from "node:fs";
 
 function err(msg: string) {
   console.error(msg);
@@ -14,6 +14,12 @@ function getInputStream(path?: string) {
   if (path === "-") return process.stdin;
   if (!existsSync(path)) err("Failed to get input stream");
   return createReadStream(path);
+}
+function getOutputStream(path?: string) {
+  if (!path) return process.stdout;
+  if (path === "-") return process.stdout;
+  if (!existsSync(path)) err("Failed to get output stream");
+  return createWriteStream(path);
 }
 
 async function main() {
@@ -49,12 +55,13 @@ Options:
     }
     const to = parsedArgs.values.to as "kip" | "poj" | "tl";
     const inputStream = getInputStream(parsedArgs.values.input);
+    const outputStream = getOutputStream(parsedArgs.values.output);
     const rl = readline.createInterface(inputStream);
     for await (const line of rl) {
       if (to === "poj") {
-        process.stdout.write(new Ku(line).POJ().hanlo);
+        outputStream.write(new Ku(line).POJ().hanlo);
       } else {
-        process.stdout.write(new Ku(line).KIP().hanlo);
+        outputStream.write(new Ku(line).KIP().hanlo);
       }
     }
   } else if (parsedArgs.values.count) {
@@ -65,11 +72,12 @@ Options:
     // (The original sng_jisoo.py also does this)
     let count = 0;
     const inputStream = getInputStream(parsedArgs.values.input);
+    const outputStream = getOutputStream(parsedArgs.values.output);
     const rl = readline.createInterface(inputStream);
     for await (const line of rl) {
       count += [...new Ku(line.trimEnd()).thianji()].length;
     }
-    process.stdout.write(`${count}\n`);
+    outputStream.write(`${count}\n`);
   } else {
     err("Either --to <kip|poj> or --count has to be specified");
   }
