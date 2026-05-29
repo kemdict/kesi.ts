@@ -18,7 +18,6 @@ function getInputStream(path?: string) {
 function getOutputStream(path?: string) {
   if (!path) return process.stdout;
   if (path === "-") return process.stdout;
-  if (!existsSync(path)) err("Failed to get output stream");
   return createWriteStream(path);
 }
 
