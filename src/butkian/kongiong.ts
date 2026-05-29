@@ -38,6 +38,7 @@ export const 標點符號 = new Set([...句中標點符號, ...斷句標點符�
 // the block (U+303E, U+31EF).
 export const 組字式符號 = "⿰⿱⿲⿳⿴⿵⿶⿷⿸⿹⿺⿻⿼⿽⿾⿿〾㇯";
 
+/** Return whether `char` counts as lomaji. */
 export function si_lomaji(char: string): boolean {
   return 敢是拼音字元(char) || /^[0-9]$/.test(char);
 }
@@ -63,6 +64,11 @@ export function 敢是注音符號(char: string): boolean {
   return /^\p{Script=Bopomofo}$/v.test(char);
 }
 
+/**
+ * Normalize Taigi text.
+ * Get rid of non-printable characters, replace old private codepoints with
+ * their Unicode codepoints, then return the result in NFC normalization form.
+ */
 export function normalize_taibun(taibun: string): string {
   // Replace non-printable characters
   let result = taibun.replace(
