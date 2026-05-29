@@ -1,10 +1,53 @@
 #!/usr/bin/env node
+// -*- mode: typescript; -*-
 
 import { existsSync } from "node:fs";
 import { Ku } from "./index.ts";
 import * as readline from "node:readline";
 import { parseArgs } from "node:util";
 import { createReadStream, createWriteStream } from "node:fs";
+import { Transform } from "node:stream";
+
+function lineTransformStream(transformFn: (line: string) => string) {
+  let buf = "";
+  return new Transform({
+    transform(chunk: Buffer, _encoding, callback) {
+      try {
+        const lines = chunk.toString("utf-8").split("\n");
+        let toWrite = "";
+        for (let i = 0; i < lines.length; i++) {
+          if (i === lines.length - 1) {
+            // last split part, not a complete line
+            buf += lines[i];
+            continue;
+          } else if (i === 0) {
+            // first line (and is not the last part), merge the buffer in
+            const line = buf + lines[i];
+            buf = "";
+            toWrite += transformFn(line) + "\n";
+          } else {
+            // every other complete line
+            const line = lines[i];
+            toWrite += transformFn(line) + "\n";
+          }
+        }
+        callback(null, toWrite);
+        //
+      } catch (err) {
+        callback(err as Error);
+        return;
+      }
+    },
+    flush(callback) {
+      try {
+        callback(null, transformFn(buf));
+      } catch (err) {
+        callback(err as Error);
+        return;
+      }
+    },
+  });
+}
 
 function err(msg: string) {
   console.error(msg);
@@ -57,14 +100,14 @@ Options:
     const to = parsedArgs.values.to as "kip" | "poj" | "tl";
     const inputStream = getInputStream(parsedArgs.values.input);
     const outputStream = getOutputStream(parsedArgs.values.output);
-    const rl = readline.createInterface(inputStream);
-    for await (const line of rl) {
+    const transformStream = lineTransformStream((line) => {
       if (to === "poj") {
-        outputStream.write(new Ku(line).POJ().hanlo);
+        return new Ku(line).POJ().hanlo;
       } else {
-        outputStream.write(new Ku(line).KIP().hanlo);
+        return new Ku(line).KIP().hanlo;
       }
-    }
+    });
+    inputStream.pipe(transformStream).pipe(outputStream);
   } else if (parsedArgs.values.count) {
     if (!parsedArgs.values.to && !parsedArgs.values.count) {
       err("Either --to <kip|poj> or --count has to be specified");
