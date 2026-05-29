@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { existsSync } from "node:fs";
 import { Ku } from "./index.ts";
 import * as readline from "node:readline";
