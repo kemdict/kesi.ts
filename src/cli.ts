@@ -27,8 +27,7 @@ Options:
   --input <file>, -i <file>: take input from <file> instead of stdin
   --output <file>, -o <file>: write to <file> instead of stdout
   --to <kip|poj>: convert input to KIP or POJ
-  --count: count the number of syllables
-`);
+  --count: count the number of syllables`);
     process.exit(0);
   }
   if (parsedArgs.values.to) {
