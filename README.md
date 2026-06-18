@@ -49,3 +49,7 @@ echo "我是Tâi-gí ê ke-si" | npx @kemdict/kesi --count # -> 7
 
 - `si_lomaji` is public
 - This provides a CLI
+
+## Declaration
+
+The initial porting in [abb90d113df679258b1832107793fcd39a2f46c5](https://github.com/kemdict/kesi.ts/commit/abb90d113df679258b1832107793fcd39a2f46c5), the porting of BDD rules, and some UTF-16 fixes were done with Gemini models.
