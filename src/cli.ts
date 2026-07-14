@@ -7,6 +7,7 @@ import * as readline from "node:readline";
 import { parseArgs } from "node:util";
 import { createReadStream, createWriteStream } from "node:fs";
 import { Transform } from "node:stream";
+import { pipeline } from "node:stream/promises";
 
 function lineTransformStream(transformFn: (line: string) => string) {
   let buf = "";
@@ -107,7 +108,7 @@ Options:
         return new Ku(line).KIP().hanlo;
       }
     });
-    inputStream.pipe(transformStream).pipe(outputStream);
+    await pipeline(inputStream, transformStream, outputStream);
   } else if (parsedArgs.values.count) {
     if (!parsedArgs.values.to && !parsedArgs.values.count) {
       err("Either --to <kip|poj> or --count has to be specified");
